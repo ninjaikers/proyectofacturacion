@@ -1,0 +1,110 @@
+
+<div class="container" *ngIf="factura && user">
+  <h1>Actualizar Factura</h1>
+  <div>
+
+    <h2>DATOS DEL CLIENTE</h2>
+    <!--NUMERO DE FACTURA-->
+    <mat-form-field>
+      <input matInput [(ngModel)]="factura.facturaNumero" type="text" placeholder="Numero Factura" disabled>
+    </mat-form-field>
+
+    <!--SELECCIONA EL TIPO DE DOCUMENTO-->
+    <mat-form-field>
+      <mat-select placeholder="Tipo Persona" [(ngModel)]="factura.facturaClienteTipo " name="tiposDocumento">
+        <mat-option *ngFor="let tipo of tiposDocumento" [value]="tipo.valor" aria-required="">
+          {{tipo.muestraValor}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!--NUMERO DE DOCUMENTO-->
+    <mat-form-field>
+      <input matInput [(ngModel)]="factura.facturaClienteDocumento" type="text" placeholder="Numero Documento">
+      <span matPrefix>{{tipoPersonaSelected | uppercase}}-</span>
+    </mat-form-field>
+
+    <!--NOMBRE CLIENTE-->
+    <mat-form-field>
+      <input matInput [(ngModel)]="factura.facturaClienteNombre" type="text" placeholder="Cliente">
+    </mat-form-field>
+
+    <!--DIRECCION CLIENTE-->
+    <mat-form-field>
+      <input matInput [(ngModel)]="factura.facturaClienteDireccion" type="text" placeholder="direccion">
+    </mat-form-field>
+
+    <!--BOTON PARA REGISTRAR FACTURA-->
+    <button mat-raised-button color="primary" (click)="actualizar()">ACTUALIZAR <i class="material-icons"> refresh </i></button>
+  </div>
+
+
+  <div>
+    <h2>LISTADO ARTICULOS</h2>
+    <mat-form-field>
+      <input matInput [(ngModel)]="articulo.articuloDescripcion" type="text" placeholder="Articulo">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="articulo.articuloCantidad" type="text" placeholder="Cantidad">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="articulo.articuloPrecio" type="text" placeholder="Precio Unitario">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput [(ngModel)]="articulo.articuloTasa" type="text" placeholder="Tasa">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="agregar()">AGREGAR <i class="material-icons">
+        add_shopping_cart
+        </i></button>
+
+  </div>
+
+  <div>
+    <table border="1" *ngIf="hayRegistros(); else sinarticulos" id="tabla">
+      <tr>
+        <th>Articulo</th>
+        <th>Cantidad</th>
+        <th>Precio Unitario</th>
+        <th>Tasa</th>
+        <th>IVA</th>
+        <th>Precio Total</th>
+      </tr>
+      <tr *ngFor="let articulo of articulos">
+        <td>{{articulo.articuloDescripcion}}</td>
+        <td>{{articulo.articuloCantidad}}</td>
+        <td>{{articulo.articuloPrecio}}</td>
+        <td>{{articulo.articuloTasa}}%</td>
+        <td>{{articulo.articuloIVA}}</td>
+        <td>{{articulo.articuloPrecioTotal}}</td>
+
+        <td><button (click)="borrar(articulo)" class="btn">Eliminar <i class="material-icons">
+              delete_forever
+            </i></button></td>
+
+      </tr>
+      <tr>
+        <td colspan="5">Sub Total</td>
+        <td>{{factura.facturaSubTotal}}</td>
+      </tr>
+      <tr>
+        <td colspan="5">IVA Total</td>
+        <td>{{factura.facturaIVATotal}}</td>
+      </tr>
+      <tr>
+        <td colspan="5">TOTAL</td>
+        <td>{{factura.facturaPrecioTotal}}</td>
+      </tr>
+
+
+
+
+    </table>
+    <ng-template #sinarticulos>
+      <p>Agregue articulos</p>
+    </ng-template>
+  </div>
+</div>

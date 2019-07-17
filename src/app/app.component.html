@@ -1,0 +1,47 @@
+<div>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+       <h1 ><i class="material-icons">
+            store
+            </i> {{title}}</h1>
+       
+
+       <div *ngIf="user">
+          <a mat-button [routerLink]="'/facturas'"><i class="material-icons">
+              list
+              </i> Lista Factura </a>
+          <a mat-button [routerLink]="'/facturas/factura-nueva'"><i class="material-icons">
+              add_box
+              </i> Factura Nueva </a>
+          <a mat-button [routerLink]="'/usuario'"><i class="material-icons">
+              person
+              </i> Usuario </a>
+    
+        </div>
+       
+       <span class="example-spacer"></span> 
+
+       
+       <div *ngIf="user">
+          <a mat-button (click)="logOut()"><i class="material-icons">
+              exit_to_app
+              </i> Salir </a>
+    
+        </div>
+
+        <div *ngIf="!user">
+            <a mat-button (click)="usersService.signInWithGoogle()"><i class="material-icons">
+                person
+                </i> Inicia Sesion </a>
+      
+          </div>
+       
+     </mat-toolbar-row>
+   </mat-toolbar>
+
+   
+
+</div>
+<router-outlet></router-outlet>
+
+

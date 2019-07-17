@@ -1,0 +1,46 @@
+<div>
+    <div mat-dialog-content>
+        <h1>{{data.facturaEncabezado.encabezadoEnteRegulador}}</h1>
+        <h2>{{data.facturaEncabezado.encabezadoRIFEmpresa}}</h2>
+        <h3>{{data.facturaEncabezado.encabezadoNombreEmpresa}}</h3>
+        <p>{{data.facturaEncabezado.encabezadoDireccion}}</p>
+        <p>{{data.facturaEncabezado.encabezadoTelefono}}</p>
+    </div>
+    <div mat-dialog-content>
+        <p>No. {{data.factura.facturaNumero}}</p>
+        <p>{{data.factura.facturaClienteNombre}}</p>
+        <p>C.I / RIF {{data.factura.facturaClienteTipo | uppercase}}-{{data.factura.facturaClienteDocumento}}</p>
+        <p>Direccion: {{data.factura.facturaClienteDireccion}}</p>
+        <p>Atendido por: {{data.factura.facturaVendedor}}</p>
+    </div>
+    <hr>
+    <div mat-dialog-content>
+        <table>
+            <tr>
+                <th>Articulo</th>
+                <th>Precio Unit.</th>
+                <th>Cantidad</th>
+                <th>Precio Total</th>
+            </tr>
+            <tr  *ngFor="let articulo of data.factura.articulos">
+                <td>{{articulo.articuloDescripcion}}</td>
+                <td>{{articulo.articuloPrecio}}</td>
+                <td>{{articulo.articuloCantidad}}</td>
+                <td>{{articulo.articuloPrecioTotal}}</td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div mat-dialog-content class="totales">
+        <p>Sub TOTAL {{data.factura.facturaSubTotal}}</p>
+        <p>IVA {{data.factura.facturaIVATotal}}</p>
+        <p>TOTAL {{data.factura.facturaPrecioTotal}}</p>
+    </div>
+    <div  mat-dialog-content>
+         <p>Factura emitida: {{data.factura.facturaFechaHora}}</p>
+    </div>
+    <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">No Imprimir</button>
+        <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Imprimir</button>
+    </div>
+</div>
